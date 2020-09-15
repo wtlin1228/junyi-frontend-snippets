@@ -1,0 +1,38 @@
+{
+  "name": "junyi-frontend-snippets",
+  "displayName": "Junyi frontend snippets",
+  "description": "Code snippets for developing frontend of Junyiacademy",
+  "version": "0.0.1",
+  "publisher": "wtlin1228",
+  "icon": "images/logo.png",
+  "keywords": [
+    "junyiacademy",
+    "snippets",
+    "react",
+    "redux",
+    "javascript"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wtlin1228/junyi-frontend-snippets"
+  },
+  "engines": {
+    "vscode": "^1.49.0"
+  },
+  "categories": [
+    "Snippets"
+  ],
+  "contributes": {
+    "snippets": [
+      {
+        "language": "javascript",
+        "path": "./snippets/snippets.code-snippets"
+      },
+      {
+        "language": "javascriptreact",
+        "path": "./snippets/snippets.code-snippets"
+      }
+    ]
+  }
+}
