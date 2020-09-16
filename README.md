@@ -1,65 +1,159 @@
 # junyi-frontend-snippets README
 
-This is the README for your extension "junyi-frontend-snippets". After writing up a brief description, we recommend including the following sections.
+## React Components
 
-## Features
+### `jc`
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+```javascript
+/** @format */
 
-For example if there is an image subfolder under your extension project workspace:
+import React from "react";
+import PropTypes from "prop-types";
+import { makeStyles } from "@material-ui/core/styles";
 
-\!\[feature X\]\(images/feature-x.png\)
+// utils
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+// assets
 
-## Requirements
+// actions
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+// components
 
-## Extension Settings
+// self-defined-components
+const useStyles = makeStyles(
+  (theme) => ({
+    root: {},
+  }),
+  { name: "App" }
+);
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+const App = ({}) => {
+  const classes = useStyles();
 
-For example:
+  return <div className={classes.root} />;
+};
 
-This extension contributes the following settings:
+App.propTypes = {};
 
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
+export default App;
+```
 
-## Known Issues
+### `jcr`
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+```javascript
+/** @format */
 
-## Release Notes
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
-Users appreciate release notes as you update your extension.
+// utils
 
-### 1.0.0
+// assets
 
-Initial release of ...
+// actions
 
-### 1.0.1
+// components
+import AppComponent from "../components/App";
 
-Fixed issue #.
+// self-defined-components
 
-### 1.1.0
+const App = ({}) => {
+  return <AppComponent />;
+};
 
-Added features X, Y, and Z.
+App.propTypes = {};
 
------------------------------------------------------------------------------------------------------------
+const mapStateToProps = (state) => ({});
 
-## Working with Markdown
+const mapDispatchToProps = (dispatch) => bindActionCreators({}, dispatch);
 
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+```
 
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
+### `jcut`
 
-### For more information
+```javascript
+/** @format */
 
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
+import React from "react";
+import { rest } from "msw";
+import { setupServer } from "msw/node";
+import { render, waitFor, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import "@testing-library/jest-dom/extend-expect";
 
-**Enjoy!**
+import App from "../App";
+
+const server = setupServer(
+  rest.get("/greeting", (req, res, ctx) => {
+    return res(ctx.json({ greeting: "hello there" }));
+  })
+);
+
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
+
+test("render App", () => {
+  // Arrange
+  render(<App />);
+
+  // Assert
+  // Alert
+});
+
+test("handlers server error", async () => {
+  server.use(
+    // override the initial 'GET /greeting' request handler
+    // to return a 500 Server Error
+    rest.get("/greeting", (req, res, ctx) => {
+      return res(ctx.status(500));
+    })
+  );
+
+  // Arrange
+  render(<App />);
+
+  // Assert
+  // Alert
+});
+```
+
+### `jrs`
+
+```javascript
+/** @format */
+
+import { createSlice, createAction } from "@reduxjs/toolkit";
+
+const namespace = "app";
+const initialState = {};
+
+const appSlice = createSlice({
+  name: namespace,
+  initialState,
+  reducers: {
+    doSomeThing: (state, action) => {
+      const { foo } = action.payload;
+      state.foo = foo;
+    },
+  },
+});
+
+appSlice.asyncActions = {
+  doOtherThingAsync: createAction(`${namespace}/doOtherThingAsync`),
+};
+
+export default appSlice;
+```
+
+### `jsc`
+
+```javascript
+const StyledDiv = styled(({ foo, ...other }) => <div {...other} />)(
+  ({ foo }) => ({}),
+  { name: StyledDiv }
+);
+```

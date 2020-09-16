@@ -42,7 +42,7 @@
     "description": "Basic React Component"
   },
   "junyiReactComponentWithRedux": {
-    "prefix": "jrc",
+    "prefix": "jcr",
     "body": [
       "/** @format */",
       "",
