@@ -1,8 +1,8 @@
 {
   "name": "junyi-frontend-snippets",
-  "displayName": "Junyi frontend snippets",
-  "description": "Code snippets for developing frontend of Junyiacademy",
-  "version": "0.0.1",
+  "displayName": "Junyi Academy frontend snippets",
+  "description": "Code snippets for developing frontend of Junyi Academy",
+  "version": "1.0.0",
   "publisher": "wtlin1228",
   "icon": "images/logo.png",
   "keywords": [
